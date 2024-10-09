@@ -1,101 +1,63 @@
 package com.example.attendease.models;
 
-
-
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
 
-import java.util.List;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
 
 @Entity
+@Table(name = "students")
 public class Student {
+	 @Id
+	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	    private Long id;
+	    
+	    private String username;
+	    private String password;
+	    
+	    @ManyToOne
+	    private Classroom classroom;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long studentId;
+		public Long getId() {
+			return id;
+		}
 
-    @Column(nullable = false)
-    private String name;
+		public void setId(Long id) {
+			this.id = id;
+		}
 
-    @Column(nullable = false, unique = true)
-    private String email;
+		public String getUsername() {
+			return username;
+		}
 
-    @Column(nullable = false)
-    private String password;
+		public void setUsername(String username) {
+			this.username = username;
+		}
 
-    @ManyToMany(mappedBy = "students")
-    private List<Classroom> classrooms;
+		public String getPassword() {
+			return password;
+		}
 
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
-    private List<Attendance> attendanceRecords;
-    
-    
-    
+		public void setPassword(String password) {
+			this.password = password;
+		}
 
-	public Student(Long studentId, String name, String email, String password, List<Classroom> classrooms,
-			List<Attendance> attendanceRecords) {
-		super();
-		this.studentId = studentId;
-		this.name = name;
-		this.email = email;
-		this.password = password;
-		this.classrooms = classrooms;
-		this.attendanceRecords = attendanceRecords;
-	}
+		public Classroom getClassroom() {
+			return classroom;
+		}
 
-	public Long getStudentId() {
-		return studentId;
-	}
+		public void setClassroom(Classroom classroom) {
+			this.classroom = classroom;
+		}
 
-	public void setStudentId(Long studentId) {
-		this.studentId = studentId;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public List<Classroom> getClassrooms() {
-		return classrooms;
-	}
-
-	public void setClassrooms(List<Classroom> classrooms) {
-		this.classrooms = classrooms;
-	}
-
-	public List<Attendance> getAttendanceRecords() {
-		return attendanceRecords;
-	}
-
-	public void setAttendanceRecords(List<Attendance> attendanceRecords) {
-		this.attendanceRecords = attendanceRecords;
-	}
-
-    
+		public Student() {
+			super();
+		}
+	    
+	    
+	    
 }

@@ -5,9 +5,9 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.attendease.models.Teachers;
+import com.example.attendease.models.Admin;
 
 @Repository
-public interface TeacherRepository extends JpaRepository<Teachers, Long> {
-    Optional<Teachers> findByIdAndPassword(Long id, String password);
+public interface AdminRepository extends JpaRepository<Admin, Long> {
+    Optional<Admin> findByUsername(String username);
 }

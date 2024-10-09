@@ -6,7 +6,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -14,30 +13,24 @@ import jakarta.persistence.Table;
 @Table(name = "attendance")
 public class Attendance {
 
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private LocalDate attendanceDate;
+    
     @ManyToOne
-    @JoinColumn(name = "student_id", nullable = false)
-    private Student student;
-
-    @ManyToOne
-    @JoinColumn(name = "classroom_id", nullable = false)
     private Classroom classroom;
 
-    private Boolean present;
+    @ManyToOne
+    private Student student;
 
-    private LocalDate date;
+    private Boolean present;
+    
     
 
-	public Attendance( Student student, Classroom classroom, Boolean present, LocalDate date) {
+	public Attendance() {
 		super();
-		
-		this.student = student;
-		this.classroom = classroom;
-		this.present = present;
-		this.date = date;
 	}
 
 	public Long getId() {
@@ -48,12 +41,12 @@ public class Attendance {
 		this.id = id;
 	}
 
-	public Student getStudent() {
-		return student;
+	public LocalDate getAttendanceDate() {
+		return attendanceDate;
 	}
 
-	public void setStudent(Student student) {
-		this.student = student;
+	public void setAttendanceDate(LocalDate attendanceDate) {
+		this.attendanceDate = attendanceDate;
 	}
 
 	public Classroom getClassroom() {
@@ -64,26 +57,21 @@ public class Attendance {
 		this.classroom = classroom;
 	}
 
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+
 	public Boolean getPresent() {
 		return present;
 	}
 
 	public void setPresent(Boolean present) {
 		this.present = present;
-	}
+	} 
 
-	public LocalDate getDate() {
-		return date;
-	}
-
-	public void setDate(LocalDate date) {
-		this.date = date;
-	}
-
-	public Attendance() {
-		super();
-	}
-
-    
     
 }
