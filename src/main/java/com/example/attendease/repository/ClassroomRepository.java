@@ -8,5 +8,5 @@ import com.example.attendease.models.Classroom;
 import com.example.attendease.models.Teachers;
 
 public interface ClassroomRepository extends JpaRepository<Classroom, Long>{
-	List<Classroom> findByTeachers(Teachers teacher);
+	List<Classroom> findByTeacherId(Long teacherId);
 }

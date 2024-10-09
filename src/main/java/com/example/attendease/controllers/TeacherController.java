@@ -3,45 +3,34 @@ package com.example.attendease.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.attendease.dto.AttendanceData;
 import com.example.attendease.models.Attendance;
 import com.example.attendease.models.Classroom;
+import com.example.attendease.models.Teachers;
 import com.example.attendease.service.TeacherService;
-
 @RestController
 @RequestMapping("/api/teacher")
 public class TeacherController {
-	 @Autowired
-	    private TeacherService teacherService;
 
-//	     Teacher login - upon login, show the classrooms assigned to the teacher.
-	   
-	    @GetMapping("/{teacherId}/classrooms")
-	    public List<Classroom> getClassrooms(@PathVariable Long teacherId) {
-	        return teacherService.getClassroomsByTeacher(teacherId);
-	    }
+    @Autowired
+    private TeacherService teacherService;
 
+    @PostMapping("/login")
+    public Teachers login(@RequestParam String email, @RequestParam String password) {
+        return teacherService.login(email, password);
+    }
 
-//	     Endpoint for the teacher to take attendance for a specific classroom.
+    @PostMapping("/classroom")
+    public Classroom createClassroom(@RequestBody Classroom classroom, @RequestParam Long teacherId) {
+        return teacherService.createClassroom(classroom, teacherId);
+    }
 
-	    @PostMapping("/{teacherId}/classroom/{classroomId}/attendance")
-	    public List<Attendance> takeAttendance(@PathVariable Long teacherId,@PathVariable Long classroomId,@RequestBody List<AttendanceData> attendanceData) {
-	        return teacherService.takeAttendance(teacherId, classroomId, attendanceData);
-	    }
-	    
-	    
-//	     Endpoint for the teacher to create a new classroom.
-	    
-	    @PostMapping("/{teacherId}/classrooms")
-	    public Classroom createClassroom(@PathVariable Long teacherId, @RequestBody String classCode) {
-	        return teacherService.createClassroom(teacherId, classCode);
+    @GetMapping("/classrooms")
+    public List<Classroom> getClassrooms(@RequestParam Long teacherId) {
+        return teacherService.getClassrooms(teacherId);
+    }
 
-}
+    // Additional endpoints for taking attendance can be added here.
 }
