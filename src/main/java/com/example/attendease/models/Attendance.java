@@ -29,9 +29,9 @@ public class Attendance {
     private LocalDate date;
     
 
-	public Attendance(Long id, Student student, Classroom classroom, Boolean present, LocalDate date) {
+	public Attendance( Student student, Classroom classroom, Boolean present, LocalDate date) {
 		super();
-		this.id = id;
+		
 		this.student = student;
 		this.classroom = classroom;
 		this.present = present;
