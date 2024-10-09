@@ -5,13 +5,12 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import com.example.attendease.models.Attendance;
 import com.example.attendease.models.Classroom;
 import com.example.attendease.models.Student;
-
-public interface AttendanceRepository extends JpaRepository<Attendance, Long>{
-	List<Attendance> findByClassroomIdAndDate(Long classroomId, Date date);
-//	List<Attendance> findByClassroomAndDate(Classroom classroom, LocalDate date);
-//    Attendance findByStudentAndClassroomAndDate(Student student, Classroom classroom,LocalDate attendanceDate);
+@Repository
+public interface AttendanceRepository extends JpaRepository<Attendance, Long> {
+    List<Attendance> findByClassroomAndDate(Classroom classroom, LocalDate date);
 }

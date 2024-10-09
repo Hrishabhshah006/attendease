@@ -18,48 +18,33 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "classrooms")
 public class Classroom {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(nullable = false, unique = true)
+    private Long classroomId;
     private String classCode;
+    private String className;
 
     @ManyToOne
-    @JoinColumn(name = "teacher_id", nullable = false)
+    @JoinColumn(name = "teacher_id")
     private Teachers teacher;
 
     @ManyToMany
     @JoinTable(
-        name = "student_classroom",
+        name = "classroom_student",
         joinColumns = @JoinColumn(name = "classroom_id"),
         inverseJoinColumns = @JoinColumn(name = "student_id")
     )
     private List<Student> students;
 
     @OneToMany(mappedBy = "classroom", cascade = CascadeType.ALL)
-    private List<Attendance> attendanceRecords;
+    private List<Attendance> attendances;
 
-    
-    
-    
-	public Classroom(Long id, String classCode, Teachers teacher, List<Student> students,
-			List<Attendance> attendanceRecords) {
-		super();
-		this.id = id;
-		this.classCode = classCode;
-		this.teacher = teacher;
-		this.students = students;
-		this.attendanceRecords = attendanceRecords;
+	public Long getClassroomId() {
+		return classroomId;
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
+	public void setClassroomId(Long classroomId) {
+		this.classroomId = classroomId;
 	}
 
 	public String getClassCode() {
@@ -68,6 +53,14 @@ public class Classroom {
 
 	public void setClassCode(String classCode) {
 		this.classCode = classCode;
+	}
+
+	public String getClassName() {
+		return className;
+	}
+
+	public void setClassName(String className) {
+		this.className = className;
 	}
 
 	public Teachers getTeacher() {
@@ -86,13 +79,13 @@ public class Classroom {
 		this.students = students;
 	}
 
-	public List<Attendance> getAttendanceRecords() {
-		return attendanceRecords;
+	public List<Attendance> getAttendances() {
+		return attendances;
 	}
 
-	public void setAttendanceRecords(List<Attendance> attendanceRecords) {
-		this.attendanceRecords = attendanceRecords;
+	public void setAttendances(List<Attendance> attendances) {
+		this.attendances = attendances;
 	}
 
-   
+    
 }

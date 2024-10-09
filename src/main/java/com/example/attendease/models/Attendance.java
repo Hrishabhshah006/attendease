@@ -8,8 +8,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "attendance")
 public class Attendance {
 
     @Id
@@ -76,6 +78,10 @@ public class Attendance {
 
 	public void setDate(LocalDate date) {
 		this.date = date;
+	}
+
+	public Attendance() {
+		super();
 	}
 
     

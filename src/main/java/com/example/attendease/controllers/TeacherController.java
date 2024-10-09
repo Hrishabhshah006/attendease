@@ -1,36 +1,53 @@
 package com.example.attendease.controllers;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.example.attendease.dto.AttendanceData;
-import com.example.attendease.models.Attendance;
 import com.example.attendease.models.Classroom;
 import com.example.attendease.models.Teachers;
 import com.example.attendease.service.TeacherService;
-@RestController
-@RequestMapping("/api/teacher")
-public class TeacherController {
 
+@RestController
+@RequestMapping("/api/teachers")
+public class TeacherController {
     @Autowired
     private TeacherService teacherService;
 
     @PostMapping("/login")
-    public Teachers login(@RequestParam String email, @RequestParam String password) {
-        return teacherService.login(email, password);
+    public ResponseEntity<Teachers> login(@RequestParam Long id, @RequestParam String password) {
+        Teachers teacher = teacherService.login(id, password);
+        return ResponseEntity.ok(teacher);
     }
 
-    @PostMapping("/classroom")
-    public Classroom createClassroom(@RequestBody Classroom classroom, @RequestParam Long teacherId) {
-        return teacherService.createClassroom(classroom, teacherId);
+    @GetMapping("/{teacherId}/classrooms")
+    public ResponseEntity<List<Classroom>> getClassrooms(@PathVariable Long teacherId) {
+        List<Classroom> classrooms = teacherService.getClassrooms(teacherId);
+        return ResponseEntity.ok(classrooms);
     }
 
-    @GetMapping("/classrooms")
-    public List<Classroom> getClassrooms(@RequestParam Long teacherId) {
-        return teacherService.getClassrooms(teacherId);
+    @PostMapping("/{teacherId}/classrooms")
+    public ResponseEntity<Classroom> createClassroom(@PathVariable Long teacherId, @RequestParam String className) {
+        Classroom classroom = teacherService.createClassroom(teacherId, className);
+        return ResponseEntity.ok(classroom);
     }
 
-    // Additional endpoints for taking attendance can be added here.
+    @PostMapping("/{classroomId}/attendance")
+    public ResponseEntity<Void> takeAttendance(
+            @PathVariable Long classroomId,
+            @RequestParam LocalDate date,
+            @RequestBody Map<Long, Boolean> attendanceData) {
+        teacherService.takeAttendance(classroomId, date, attendanceData);
+        return ResponseEntity.ok().build();
+    }
 }

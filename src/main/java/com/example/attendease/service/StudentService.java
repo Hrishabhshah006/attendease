@@ -13,7 +13,7 @@ public class StudentService {
     private StudentRepository studentRepository;
 
     public Student login(String email, String password) {
-        Student student = studentRepository.findByEmail(email);
+        Student student = studentRepository.findByEmail();
         if (student != null && student.getPassword().equals(password)) {
             return student;
         }
