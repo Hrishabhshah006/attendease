@@ -1,5 +1,6 @@
 package com.example.attendease.service;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,10 @@ public class ClassroomService {
     public Classroom createClassroom(Classroom classroom) {
         classroom.setClassCode(generateUniqueClassCode());
         return classroomRepository.save(classroom);
+    }
+    
+    public List<Classroom> getAllClassrooms() {
+        return classroomRepository.findAll();
     }
 
     private String generateUniqueClassCode() {

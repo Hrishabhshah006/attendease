@@ -1,8 +1,7 @@
 package com.example.attendease.controllers;
 
-import java.time.LocalDate;
+
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,11 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.attendease.models.Classroom;
-import com.example.attendease.repository.AttendanceRepository;
 import com.example.attendease.models.Admin;
 import com.example.attendease.models.Attendance;
 import com.example.attendease.service.AdminService;
@@ -44,7 +41,12 @@ public class AdminController {
     public ResponseEntity<String> adminLogin(@RequestBody Admin request) {
         return ResponseEntity.ok("Admin logged in successfully");
     }
-
+    
+    @GetMapping("/classrooms")
+    public ResponseEntity<List<Classroom>> getClassroomList() {
+        List<Classroom> classrooms = classroomService.getAllClassrooms();
+        return ResponseEntity.ok(classrooms);
+    }
    
     @PostMapping("/classroom")
     public ResponseEntity<Classroom> createClassroom(@RequestBody Classroom classroom) {

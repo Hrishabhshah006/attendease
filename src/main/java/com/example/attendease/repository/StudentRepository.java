@@ -10,6 +10,6 @@ import com.example.attendease.models.Student;
 
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Long> {
-    Optional<Student> findByUsername(String username);
+   Optional<Student> findByUsername(String username);
 	List<Student> findByClassroomId(Long classroomId);
 }

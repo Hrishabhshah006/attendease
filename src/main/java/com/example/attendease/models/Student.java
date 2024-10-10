@@ -18,6 +18,7 @@ public class Student {
 	    
 	    private String username;
 	    private String password;
+	    private String email;
 	    
 	    @ManyToOne
 	    private Classroom classroom;
@@ -57,6 +58,15 @@ public class Student {
 		public Student() {
 			super();
 		}
+
+		public String getEmail() {
+			return email;
+		}
+
+		public void setEmail(String email) {
+			this.email = email;
+		}
+		
 	    
 	    
 	    
