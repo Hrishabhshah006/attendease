@@ -10,4 +10,5 @@ import com.example.attendease.models.Admin;
 @Repository
 public interface AdminRepository extends JpaRepository<Admin, Long> {
     Optional<Admin> findByUsername(String username);
+    Admin findByUserID(String userID);
 }

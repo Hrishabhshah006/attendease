@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.attendease.models.Classroom;
@@ -38,8 +39,9 @@ public class AdminController {
     }
     
     @PostMapping("/login")
-    public ResponseEntity<String> adminLogin(@RequestBody Admin request) {
-        return ResponseEntity.ok("Admin logged in successfully");
+    public ResponseEntity<String> adminLogin(@RequestParam String userID,@RequestParam String password) {
+        String result = adminService.login(userID, password);
+        return ResponseEntity.ok(result);
     }
     
     @GetMapping("/classrooms")

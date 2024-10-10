@@ -1,5 +1,6 @@
 package com.example.attendease.models;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,7 +14,10 @@ public class Admin {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+	
+	@Column(unique = true)
+	private String userID;
+	
     private String username;
     private String password;
     private String email;
@@ -49,6 +53,20 @@ public class Admin {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getUserID() {
+		return userID;
+	}
+
+	public void setUserID(String userID) {
+		this.userID = userID;
+	}
+
+	@Override
+	public String toString() {
+		return "Admin [id=" + id + ", userID=" + userID + ", username=" + username + ", password=" + password
+				+ ", email=" + email + "]";
 	}
     
     

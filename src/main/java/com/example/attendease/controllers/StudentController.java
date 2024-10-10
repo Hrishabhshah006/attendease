@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.attendease.models.Classroom;
@@ -33,8 +34,9 @@ public class StudentController {
     }
     
     @PostMapping("/login")
-    public ResponseEntity<String> studentLogin(@RequestBody Student request) {
-        return ResponseEntity.ok("Student logged in successfully");
+    public ResponseEntity<String> studentLogin(@RequestParam String studentID,@RequestParam String password) {
+        String result = studentService.login(studentID, password);
+        return ResponseEntity.ok(result);
     }
 
     @PostMapping("/join/{classCode}")

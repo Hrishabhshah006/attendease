@@ -14,4 +14,15 @@ public class AdminService {
     public Admin createAdmin(Admin admin) {
         return adminRepository.save(admin);
     }
+    
+    public String login(String userID, String password) {
+//    	System.out.println(userID);
+        Admin admin = adminRepository.findByUserID(userID);
+//        System.out.println(admin);
+        if (admin!= null && admin.getUserID().equals(userID) && admin.getPassword().equals(password)) {
+            return "Login successful!";
+        } else {
+            return "Invalid username or password.";
+        }
+}
 }
