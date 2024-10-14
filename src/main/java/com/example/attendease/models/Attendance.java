@@ -27,7 +27,7 @@ public class Attendance {
 
     private Boolean present;
     
-    
+//    private Student userName;
 
 	public Attendance() {
 		super();
@@ -40,6 +40,16 @@ public class Attendance {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	
+
+//	public Student getUserName() {
+//		return userName;
+//	}
+//
+//	public void setUserName(Student userName) {
+//		this.userName = userName;
+//	}
 
 	public LocalDate getAttendanceDate() {
 		return attendanceDate;

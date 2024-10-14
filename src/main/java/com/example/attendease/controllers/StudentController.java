@@ -55,7 +55,7 @@ public class StudentController {
         return ResponseEntity.ok(result);
     }
     
-    @GetMapping("/student/{studentId}")
+    @GetMapping("/{studentId}")
     public ResponseEntity<List<Attendance>> getAttendanceForStudent(@PathVariable Long studentId) {
         List<Attendance> attendanceList = attendanceService.getAttendanceForStudent(studentId);
         return ResponseEntity.ok(attendanceList);
