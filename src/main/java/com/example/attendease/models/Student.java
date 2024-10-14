@@ -1,12 +1,15 @@
 package com.example.attendease.models;
 
+import java.util.Set;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 
@@ -27,7 +30,11 @@ public class Student {
 	    private String classCode; // unique class code for joining
 //	    private String className;
 	    
+	    @OneToMany(mappedBy = "student")
+	    private Set<Attendance> attendances;
+	    
 	    @ManyToOne
+	    @JoinColumn(name = "classroom_id", nullable = false)
 	    private Classroom classroom;
 
 		public Long getId() {
@@ -88,6 +95,14 @@ public class Student {
 
 		public void setClassCode(String classCode) {
 			this.classCode = classCode;
+		}
+
+		public Set<Attendance> getAttendances() {
+			return attendances;
+		}
+
+		public void setAttendances(Set<Attendance> attendances) {
+			this.attendances = attendances;
 		}
 
 //		public String getClassName() {

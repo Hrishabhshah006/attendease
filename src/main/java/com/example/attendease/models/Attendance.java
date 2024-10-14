@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -20,9 +21,11 @@ public class Attendance {
     private LocalDate attendanceDate;
     
     @ManyToOne
+    @JoinColumn(name = "classroom_id")
     private Classroom classroom;
 
     @ManyToOne
+    @JoinColumn(name = "student_id")
     private Student student;
 
     private Boolean present;

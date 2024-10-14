@@ -35,6 +35,13 @@ public class StudentService {
         }
     }
     
+    public List<Student> getAllStudents() {
+        return studentRepository.findAll();
+    }
+    
+    public List<Student> getStudentsInClassroom(Long classroomId) {
+        return studentRepository.findByClassroomId(classroomId);
+    }
     
     public String updateStudent(String classCode,String studentID, String userName) {
         // Find the student by ID
@@ -53,7 +60,5 @@ public class StudentService {
     }
 
     
-    public List<Student> getStudentsInClassroom(Long classroomId) {
-        return studentRepository.findByClassroomId(classroomId);
-    }
+
 }
