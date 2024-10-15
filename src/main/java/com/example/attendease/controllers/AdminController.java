@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.attendease.models.Classroom;
 import com.example.attendease.models.Student;
+import com.example.attendease.dto.StudentDTO;
 import com.example.attendease.models.Admin;
 import com.example.attendease.service.AdminService;
 import com.example.attendease.service.AttendanceService;
@@ -87,7 +88,7 @@ public class AdminController {
     
 //    GET http://localhost:8080/api/admin/students
     @GetMapping("/students")
-    public List<Student> getAllStudents() {
+    public List<StudentDTO> getAllStudents() {
         return studentService.getAllStudents();
     }
     

@@ -2,6 +2,8 @@ package com.example.attendease.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,12 +20,15 @@ public class Classroom {
 
 	    private String classCode; // unique class code for joining
 	    private String className;
+	    @JsonIgnore
 	    private String studentsName;
 
 	    @OneToMany(mappedBy = "classroom")
+	    @JsonIgnore
 	    private List<Student> students;
 
 	    @OneToMany(mappedBy = "classroom")
+	    @JsonIgnore
 	    private List<Attendance> attendanceRecords;
 	    
 	    

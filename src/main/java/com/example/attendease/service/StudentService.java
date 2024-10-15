@@ -1,10 +1,12 @@
 package com.example.attendease.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.attendease.dto.StudentDTO;
 import com.example.attendease.models.Admin;
 import com.example.attendease.models.Classroom;
 import com.example.attendease.models.Student;
@@ -35,8 +37,19 @@ public class StudentService {
         }
     }
     
-    public List<Student> getAllStudents() {
-        return studentRepository.findAll();
+    public List<StudentDTO> getAllStudents() {
+        List<Student> students= studentRepository.findAll();
+        
+        List<StudentDTO> studentsDTO = new ArrayList<>();
+        for(Student student: students) {
+        	StudentDTO studentDTO = new StudentDTO();
+        	studentDTO.setEnrollmentID(student.getStudentID());
+        	studentDTO.setName(student.getUsername());
+        	studentDTO.setEmail(student.getEmail());
+        	studentDTO.setClasses(student.getClassCode());
+        	studentsDTO.add(studentDTO);
+        }
+    	return studentsDTO;
     }
     
     public List<Student> getStudentsInClassroom(Long classroomId) {

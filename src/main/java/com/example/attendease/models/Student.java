@@ -2,6 +2,8 @@ package com.example.attendease.models;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,6 +33,7 @@ public class Student {
 //	    private String className;
 	    
 	    @OneToMany(mappedBy = "student")
+	    @JsonIgnore
 	    private Set<Attendance> attendances;
 	    
 	    @ManyToOne
